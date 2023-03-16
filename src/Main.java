@@ -1,7 +1,6 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) {
@@ -12,8 +11,18 @@ public class Main {
         human.add(new Person("Vera", "Dark", 20));
         human.add(new Person("Svetla", "Bassist", 10));
 
-        Predicate<Person> personPredicate = person -> person.getAge() > 30;
-        human.removeIf(personPredicate);
+        human.sort((o1, o2) -> {
+            StringTokenizer strToken = new StringTokenizer(o1.getSurname());
+            StringTokenizer strToken1 = new StringTokenizer(o2.getSurname());
+
+            if (strToken.countTokens() < strToken1.countTokens()) {
+                return -1;
+            } else if (strToken.countTokens() > strToken1.countTokens()) {
+                return 1;
+            } else {
+                return Integer.compare(o1.getAge(), o2.getAge());
+            }
+        });
         System.out.println(human);
     }
 }
