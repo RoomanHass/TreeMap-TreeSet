@@ -1,6 +1,6 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,8 +10,10 @@ public class Main {
         human.add(new Person("Stan", "Li", 45));
         human.add(new Person("Vera", "Dark", 20));
         human.add(new Person("Svetla", "Bassist", 10));
+        human.add(new Person("Dared", "Falconer", 16));
 
-        Collections.sort(human, new ComparatorMoreOlder(7));
+        Predicate<Person> personPredicate = person -> person.getAge() < 18;
+        human.removeIf(personPredicate);
         System.out.println(human);
     }
 }
